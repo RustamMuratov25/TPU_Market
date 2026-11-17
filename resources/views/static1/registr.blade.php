@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ТПУ Регистрация</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('{{ asset('images/fonlogin.jpg') }}') no-repeat center center / cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .login-box {
+            display: flex;
+            width: 750px;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .left {
+            background: white;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+        .right {
+            background: #32cd32; /* Фирменный зеленый */
+            flex: 1;
+            padding: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid white;
+            border-radius: 25px;
+            background: transparent;
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .input-field::placeholder { color: rgba(255,255,255,0.7); }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 25px;
+            border: none;
+            background: white;
+            color: #32cd32;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="left">
+            <img src="{{ asset('images/лого_с_надписью.svg') }}" width="300" alt="лого">
+        </div>
+        <div class="right">
+            @if ($errors->any())
+                <div style="background: rgba(255, 255, 255, 0.25); border: 1px solid white; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 13px; font-weight: 600; text-align: center; color: white;">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+            <form action="{{ route('registr.store') }}" method="POST">
+                @csrf
+                <label>Введите логин:</label>
+                <input type="text" name="username" class="input-field" placeholder="Ваш логин" required>
+
+                <label>Введите пароль:</label>
+                <input type="password" name="password" class="input-field" placeholder="Ваш пароль" required>
+
+                <button type="submit" class="btn">Войти</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
